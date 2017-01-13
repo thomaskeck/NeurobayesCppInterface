@@ -1,8 +1,8 @@
 #include <cstring>
 #include <iostream>
-#include <stdlib.h>
-#include <math.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cmath>
+#include <cstdio>
 #include "NeuroBayesTeacher.hh"
 
 // declare nb's FORTRAN functions
@@ -483,7 +483,7 @@ NeuroBayesTeacher::SetTarget (float thisTarget)
 {
   if (nb_cpp_handle_error (com))
     return;
-  if (isnan (thisTarget) || isinf (thisTarget))
+  if (std::isnan (thisTarget) || std::isinf (thisTarget))
     {
       ss << "NeuroBayesTeacher::SetTarget  ERROR: "
 	<< "NAN or INF passed as target value" << std::endl;
@@ -505,7 +505,7 @@ NeuroBayesTeacher::SetWeight (float thisWeight, float thisWeight2)
     return;
   eventWeight = thisWeight;
   eventWeight2 = thisWeight2;
-  if (isnan (eventWeight))
+  if (std::isnan (eventWeight))
     {
       ss << "NeuroBayesTeacher::SetWeight  ERROR: "
 	<< "NAN passed as weight1 in event " << storedEvents << std::endl;
@@ -519,7 +519,7 @@ NeuroBayesTeacher::SetWeight (float thisWeight, float thisWeight2)
       return;
     }
 
-  if (isnan (eventWeight2))
+  if (std::isnan (eventWeight2))
     {
       ss << "NeuroBayesTeacher::SetWeight  ERROR: "
 	<< "NAN passed as weight2 in event " << storedEvents << std::endl;
@@ -547,7 +547,7 @@ NeuroBayesTeacher::SetNextInput (int numVariables, float *thisVars)
       // input variable sanity checks
       for (int i = 0; i != numVariables; ++i)
 	{
-	  if (isnan (thisVars[i]))
+	  if (std::isnan (thisVars[i]))
 	    {
 	      ss << "NeuroBayesTeacher::SetNextInput  ERROR: "
 		<< "NAN passed as input in event " << storedEvents
@@ -562,7 +562,7 @@ NeuroBayesTeacher::SetNextInput (int numVariables, float *thisVars)
 	      return;
 	    }
 
-	  if (isinf (thisVars[i]))
+	  if (std::isinf (thisVars[i]))
 	    {
 	      ss << "NeuroBayesTeacher::SetNextInput  ERROR: "
 		<< "INF passed as input in event " << storedEvents

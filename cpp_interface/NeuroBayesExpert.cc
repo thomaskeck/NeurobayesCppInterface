@@ -988,7 +988,7 @@ Expert::checkInputRange_e (float *X)
   // loop to check the values passed (if INF or NAN issue an error message and abort)
   for (int ii = 0; ii < NODE1 - 1; ++ii)
     {
-      if (isnan (X[ii]))
+      if (std::isnan (X[ii]))
 	{
 	  ss << ii << "\t" << NODE1 << std::endl;
 	  ss << " Expert::nb_expert  ERROR: NAN passed as input" << std::endl;
@@ -1005,7 +1005,7 @@ Expert::checkInputRange_e (float *X)
 	  nb_cpp_handle_error (com);
 	  return;
 	}
-      if (isinf (X[ii]))
+      if (std::isinf (X[ii]))
 	{
 	  ss << "Expert::nb_expert  ERROR: INF passed as input" << std::endl;
 	  for (int kk = 0; kk < NODE1; kk++)
@@ -1275,7 +1275,7 @@ Expert::nb_expert (ACTION key, float *input, float ARGUMENT)
     return nb_expert_delta;
 
   // check what parameter we got
-  if (isnan (ARGUMENT) || isinf (ARGUMENT))
+  if (std::isnan (ARGUMENT) || std::isinf (ARGUMENT))
     {
       ss << " Expert::nb_expert  ERROR: " << ARGUMENT <<
 	" passed as parameter for ACTION " << key << " !" << std::endl;

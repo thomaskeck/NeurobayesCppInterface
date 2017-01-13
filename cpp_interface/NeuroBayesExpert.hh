@@ -4,7 +4,7 @@
 #include "nb_param.hh" 
 #include "nb_cpp_utils.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 #include <vector>
 class Expert

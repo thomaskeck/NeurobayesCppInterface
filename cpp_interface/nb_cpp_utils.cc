@@ -2,8 +2,8 @@
 /* by Martin Hahn, neurobayes@blue-yonder.com */
 
 #include "nb_cpp_utils.h"
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 
 /* == Logging == */
 void
