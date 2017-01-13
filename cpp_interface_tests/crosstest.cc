@@ -46,8 +46,6 @@ class NeuroBayesTester {
     }
 
     ~NeuroBayesTester() {
-      if(ec != nullptr)
-        free_ec1(ec);
       if(ls != nullptr) {
         if(ls->str != nullptr) {
           free(ls->str);
@@ -365,8 +363,6 @@ class NeuroBayesTester {
     void destroy() {
       
       //std::system((std::string("rm -rf ") + test_directory).c_str());
-      if(ec != nullptr)
-        free_ec1(ec);
       ec = nullptr;
       if(ls != nullptr) {
         if(ls->str != nullptr) {

@@ -14,15 +14,13 @@ endif()
 
 set(CMAKE_Fortran_FLAGS " -fno-automatic -fcheck=bound -Wno-unused -cpp ")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++0x -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++0x -Wall -Wextra -Wl,--allow-shlib-undefined")
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/cpp_interface/nb_param.hh.in"
   "${PROJECT_SOURCE_DIR}/cpp_interface/nb_param.hh"
 )
 
-add_library(NeuroBayesCore_shared SHARED IMPORTED)
-set_target_properties(NeuroBayesCore_shared PROPERTIES IMPORTED_LOCATION "${PROJECT_SOURCE_DIR}/core/libNeuroBayesCore_shared.so")
 
 set(NeuroBayesCPPInterface_HEADERS
     "${PROJECT_SOURCE_DIR}/cpp_interface/nb_cpp_utils.h"
@@ -39,6 +37,16 @@ set(NeuroBayesCPPInterface_SOURCES
 )
 
 add_library(NeuroBayesCPPInterface_shared SHARED ${NeuroBayesCPPInterface_SOURCES} ${NeuroBayesCPPInterface_HEADERS})
+
+if(EXISTS "${PROJECT_SOURCE_DIR}/core/libNeuroBayesCore_shared.so")
+  add_library(NeuroBayesCore_shared SHARED IMPORTED)
+  set_target_properties(NeuroBayesCore_shared PROPERTIES IMPORTED_LOCATION "${PROJECT_SOURCE_DIR}/core/libNeuroBayesCore_shared.so")
+  get_target_property(NeuroBayesCore_LOCATION NeuroBayesCore_shared LOCATION)
+  install(FILES ${NeuroBayesCore_LOCATION} DESTINATION lib)
+else()
+  add_library(NeuroBayesCore_shared SHARED "${PROJECT_SOURCE_DIR}/core/dummy.c")
+endif()
+
 target_link_libraries(NeuroBayesCPPInterface_shared NeuroBayesCore_shared)
 
 include_directories("${PROJECT_SOURCE_DIR}/cpp_interface/")
@@ -59,8 +67,6 @@ install(TARGETS NeuroBayesCPPInterface_shared minimaltest
      RUNTIME DESTINATION bin   
 )
 
-get_target_property(NeuroBayesCore_LOCATION NeuroBayesCore_shared LOCATION)
-install(FILES ${NeuroBayesCore_LOCATION} DESTINATION lib)
 install(FILES ${NeuroBayesCPPInterface_HEADERS} DESTINATION include)
 
 set(CPACK_PACKAGE_VERSION 4.3)
