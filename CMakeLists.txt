@@ -14,7 +14,7 @@ endif()
 
 set(CMAKE_Fortran_FLAGS " -fno-automatic -fcheck=bound -Wno-unused -cpp ")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++0x -Wall -Wextra -Wl,--allow-shlib-undefined")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++0x -Wall -Wextra")
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/cpp_interface/nb_param.hh.in"
@@ -67,7 +67,7 @@ install(TARGETS NeuroBayesCPPInterface_shared minimaltest
      RUNTIME DESTINATION bin   
 )
 
-install(FILES ${NeuroBayesCPPInterface_HEADERS} DESTINATION include)
+install(FILES ${NeuroBayesCPPInterface_HEADERS} DESTINATION include/neurobayes)
 
 set(CPACK_PACKAGE_VERSION 4.3)
 set(CPACK_GENERATOR "RPM;DEB;TGZ")

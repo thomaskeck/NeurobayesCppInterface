@@ -129,6 +129,8 @@ bool training() {
         std::cerr << "LOG: " << ls->str << std::endl;
     }
       
+    if(ec != nullptr)
+      free_ec1(ec);
     if(ls != nullptr) {
       if(ls->str != nullptr)
         free(ls->str);
@@ -172,6 +174,7 @@ int expert() {
         case 2:
                 testok &= (ec->kind == invalid_arg_exc); break;
       }
+      free_ec1(ec);
     } else {
       testok &= (ec == nullptr);
     }
