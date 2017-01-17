@@ -206,7 +206,7 @@ int nb_get_debug(common_t** com) { assert(0); }
 void nb_set_error(common_t** com1, int input_error_code, char* msg) { assert(0); }
 void nb_delete_common(common_t** com) { assert(0); }
   
-common_t* nb_init_common(int debug_lvl, ec_t** ec1, rand_func_t rand_func, void *rand_enc, int is_teacher) { assert(0); }
+common_t* nb_init_common(int debug_lvl, ec_t** ec1, rand_func_t rand_func, void *rand_enc, int is_teacher) { return NULL; }
 void nb_register_logging(common_t** com, log_func_t log, void* enc, delete_enclosed_func_t delete_enclosed) { assert(0); }
 
 void free_ec1 (ec_t * ec) { assert(0); }

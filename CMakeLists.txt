@@ -45,6 +45,7 @@ if(EXISTS "${PROJECT_SOURCE_DIR}/core/libNeuroBayesCore_shared.so")
   install(FILES ${NeuroBayesCore_LOCATION} DESTINATION lib)
 else()
   add_library(NeuroBayesCore_shared SHARED "${PROJECT_SOURCE_DIR}/core/dummy.c")
+  install(TARGETS NeuroBayesCore_shared LIBRARY DESTINATION lib)
 endif()
 
 target_link_libraries(NeuroBayesCPPInterface_shared NeuroBayesCore_shared)
