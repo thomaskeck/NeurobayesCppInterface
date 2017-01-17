@@ -11,6 +11,8 @@
 #ifndef NEUROBAYESTEACHER_HH_
 #define NEUROBAYESTEACHER_HH_
 
+#define NEUROBAYES_VERSION 4
+
 #include "nb_param.hh"
 #include "nb_cpp_utils.h"
 
