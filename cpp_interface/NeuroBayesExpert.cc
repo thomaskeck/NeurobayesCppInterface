@@ -539,6 +539,7 @@ Expert::Expert (float *myExpertise, int myDebug, bool writeout,
 		delete_enclosed_func_t log_delete_enclosed)
 {
   com = nb_init_common_simple (myDebug, ec);
+  if (!com) return;
   if (nb_get_debug (&com) > -3 && log_f)
     {
       nb_register_logging (&com, log_f, log_enclosed, log_delete_enclosed);
@@ -645,6 +646,7 @@ Expert::init_expert (const std::string ExpertiseName, int myDebug,
 		     delete_enclosed_func_t log_delete_enclosed)
 {
   com = nb_init_common_simple (myDebug, ec);
+  if (!com) return;
   if (nb_get_debug (&com) > -3 && log_f)
     {
       nb_register_logging (&com, log_f, log_enclosed, log_delete_enclosed);
@@ -927,8 +929,11 @@ Expert::~Expert ()
 	HistoFileName = "expertHistos.hist";
       nb_histo_save_ (HistoFileName.c_str (), (int) HistoFileName.size ());
     }
-  delete[]EXPERTISE;
-  nb_delete_common (&com);
+  if (com)
+    {
+      delete[]EXPERTISE;
+      nb_delete_common (&com);
+    }
 }
 
 void
